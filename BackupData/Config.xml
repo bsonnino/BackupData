@@ -2,6 +2,6 @@
 <Configuration>
   <IncludePaths>D:\Projetos;R:\Documentos;R:\DiscoF\Projetos;R:\DiscoG\ProjetosNovo;R:\DiscoG\ProjetosW7</IncludePaths>
   <ExcludePaths>\\application files\\;\\apppackages\\;\\bin\\;\\debug\\;\\ipch\\;\\metadata\\;\\ndk\\;\\obj\\;\\package\\;\\packages\\;\\release\\;\\sdks\\;\\testresults\\</ExcludePaths>
-  <ExcludeFiles>\.~;\.3ds$;\.7z;\.accdb$;\.assets$;\.au$;\.avi$;\.bak$;\.bin$;\.cab$;\.camrec$;\.chm$;\.db$;\.db3$;\.dbf$;\.dcu$;\.dll$;\.exe$;\.fbx$;\.ffx$;\.ldf$;\.log$;\.map$;\.mdb$;\.mdf$;\.mp3$;\.mp4$;\.msi$;\.ncb$;\.nsx$;\.ntx$;\.obj$;\.old$;\.pbk$;\.pch$;\.pcp$;\.pdb$;\.plg$;\.plv$;\.pml$;\.rar$;\.resharper;\.sdf$;\.suo$;\.svclog$;\.tga$;\.tmp$;\.trc$;\.trec$;\.vsix$;\.wav$;\.wmv$;\.xap$;\.zip;\\\.;\\_</ExcludeFiles>
+  <ExcludeFiles>\.~;\.3ds$;\.7z;\.accdb$;\.assets$;\.au$;\.avi$;\.bak$;\.bin$;\.cab$;\.camrec$;\.chm$;\.db$;\.db3$;\.dbf$;\.dcu$;\.dll$;\.exe$;\.fbx$;\.ffx$;\.ldf$;\.log$;\.map$;\.mdb$;\.mdf$;\.mp3$;\.mp4$;\.msi$;\.ncb$;\.nsx$;\.ntx$;\.obj$;\.old$;\.pbk$;\.pch$;\.pcp$;\.pdb$;\.plg$;\.plv$;\.pml$;\.rar$;\.resharper;\.sdf$;\.suo$;\.svclog$;\.tga$;\.tmp$;\.trc$;\.trec$;\.vsix$;\.wav$;\.wmv$;\.xap$;\.zip;\\\.;\\_;\.user$;\.local$;\.bpl$</ExcludeFiles>
   <BackupFile>I:\Backup\BackAll</BackupFile>
 </Configuration> 
