@@ -22,11 +22,12 @@ namespace BackupData
             ExcludeFiles = doc.Root.Element("ExcludeFiles")?.Value.Split(';') ?? new string[0] ;
             ExcludePaths = doc.Root.Element("ExcludePaths")?.Value.Split(';') ?? new string[0];
             BackupFile = $"{doc.Root.Element("BackupFile")?.Value}{DateTime.Now:yyyyMMddhhmmss}.zip";
-            ExcludeFilesRegex =
-                new Regex(string.Join("|", string.Join("|", ExcludeFiles), string.Join("|", ExcludePaths)));
+            ExcludeFilesRegex = new Regex(string.Join("|", ExcludeFiles),RegexOptions.Compiled);
+            ExcludePathRegex = new Regex(string.Join("|", ExcludePaths), RegexOptions.Compiled);
         }
 
         public Regex ExcludeFilesRegex { get; }
+        public Regex ExcludePathRegex { get; }
         public IEnumerable<string> IncludePaths { get; }
         public IEnumerable<string> ExcludeFiles { get; }
         public IEnumerable<string> ExcludePaths { get; }

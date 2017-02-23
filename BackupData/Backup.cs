@@ -13,7 +13,7 @@ namespace BackupData
         public async Task<int> DoBackup(Config config, bool incremental)
         {
             var includePaths = config.IncludePaths.ToArray();
-            var files = await _fileFinder.GetFiles(includePaths, config.ExcludeFilesRegex, incremental);
+            var files = await _fileFinder.GetFiles(includePaths, config.ExcludeFilesRegex, config.ExcludePathRegex, incremental);
             using (ZipFile zip = new ZipFile())
             {
                 zip.UseZip64WhenSaving = Zip64Option.AsNecessary;

@@ -9,7 +9,8 @@ namespace BackupData
 {
     class FileFinder
     {
-        public async Task<ConcurrentDictionary<string, List<string>>> GetFiles(string[] paths, Regex regex, bool incremental)
+        public async Task<ConcurrentDictionary<string, List<string>>> GetFiles(string[] paths, 
+            Regex excludeFilesRegex, Regex excludePathsRegex, bool incremental)
         {
             var files = new ConcurrentDictionary<string, List<string>>();
             var tasks = paths.Select(path =>
@@ -24,16 +25,15 @@ namespace BackupData
                     }
                     else
                         rootDir = path;
-                    var selectedFiles = Enumerable.Where<string>(GetFilesInDirectory(path), f => !regex.IsMatch(f.ToLower()));
-                    if (incremental)
-                        selectedFiles = selectedFiles.Where(f => (File.GetAttributes(f) & FileAttributes.Archive) != 0);
+                    var selectedFiles = GetFilesInDirectory(path, excludeFilesRegex, excludePathsRegex, incremental);
                     files.AddOrUpdate(rootDir, selectedFiles.ToList(), (a, b) => b);
                 }));
             await Task.WhenAll(tasks);
             return files;
         }
 
-        private List<string> GetFilesInDirectory(string directory)
+        private List<string> GetFilesInDirectory(string directory, Regex excludeFilesRegex, 
+            Regex excludePathsRegex,bool incremental)
         {
             var files = new List<string>();
             try
@@ -41,14 +41,17 @@ namespace BackupData
                 var directories = Directory.GetDirectories(directory);
                 try
                 {
-                    files.AddRange(Directory.EnumerateFiles(directory));
+                    var selectedFiles = Directory.EnumerateFiles(directory).Where(f => !excludeFilesRegex.IsMatch(f.ToLower()));
+                    if (incremental)
+                        selectedFiles = selectedFiles.Where(f => (File.GetAttributes(f) & FileAttributes.Archive) != 0);
+                    files.AddRange(selectedFiles);
                 }
                 catch
                 {
                 }
-                foreach (var dir in directories)
+                foreach (var dir in directories.Where(d => !excludePathsRegex.IsMatch(d.ToLower())))
                 {
-                    files.AddRange(GetFilesInDirectory(Path.Combine(directory, dir)));
+                    files.AddRange(GetFilesInDirectory(Path.Combine(directory, dir), excludeFilesRegex, excludePathsRegex, incremental));
                 }
             }
             catch
