@@ -7,7 +7,7 @@ namespace BackupData
 {
     class Options
     {
-        [Option(DefaultValue = "config.xml",
+        [Option('c', DefaultValue = "config.xml",
             HelpText = "Configuration file for the backup.")]
         public string ConfigFile { get; set; }
 
